@@ -6,7 +6,7 @@ export default class UseControllers {
   public static getUsers = async (req: Request, res: Response) => {
     try {
       const users = await prisma.register.findMany();
-      res.status(401).json({ users });
+      res.status(201).json({ users });
     } catch (error) {
       res.send({ error });
     }
@@ -24,4 +24,4 @@ export default class UseControllers {
       res.status(401).json({ message: 'recurso nao disponivel', error })
     }
   };
-}
+} 

@@ -1,10 +1,9 @@
 import express from "express";
 import login from "../middlewares/AuthLoguin";
-const Router = express.Router()
+const ExportRouter = express.Router()
 
-Router.
+ExportRouter
 
 
-post('/login',login)
-
-export default Router
+.post('/login', login );
+export default ExportRouter

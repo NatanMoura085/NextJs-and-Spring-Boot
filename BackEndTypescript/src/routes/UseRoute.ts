@@ -1,12 +1,12 @@
 import  express  from "express";
 import UseControllers from "../controllers/Usecontrollers";
 
-const Router = express.Router()
+const UseRoute = express.Router()
 
-Router
+UseRoute
 
 
 .get('/users',UseControllers.getUsers)
 .post('/users',UseControllers.postUser)
 
-export default Router
+export default UseRoute
