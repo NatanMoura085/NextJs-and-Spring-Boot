@@ -3,9 +3,19 @@ import bcrypt from "bcrypt";
 import { sign } from "jsonwebtoken";
 import { PrismaClient } from "@prisma/client";
 import { load } from "ts-dotenv";
-const env = load({
+import { EnvType } from 'ts-dotenv';
+
+export type Env = EnvType<typeof schema>;
+
+export const schema = {
   SECRET_KEY: String,
-});
+};
+
+export let env: Env;
+
+export function loadEnv(): void {
+    env = load(schema);
+}
 const prisma = new PrismaClient();
 
 const login = async (req: Request, res: Response, next: NextFunction) => {
