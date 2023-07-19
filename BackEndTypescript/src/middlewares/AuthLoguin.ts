@@ -2,19 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import bcrypt from "bcrypt";
 import { sign } from "jsonwebtoken";
 import { PrismaClient } from "@prisma/client";
-import { load, EnvType } from "ts-dotenv";
 
-// export type Env = EnvType<typeof schema>;
-
-// export const schema = {
-//   SECRET_KEY: String,
-// };
-
-// export let env: Env;
-
-// export function loadEnv(): void {
-//   env = load(schema);
-// }
 const prisma = new PrismaClient();
 
 const login = async (req: Request, res: Response, next: NextFunction) => {
@@ -32,10 +20,12 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
       return res.status(401).json({ error: "Invalid password" });
     }
 
-    // const token = sign({ id: user.id }, env.SECRET_KEY, { expiresIn: "1h" });
+    const token = sign({ id: user.id }, process.env.SECRET_KEY as string, {
+      expiresIn: "1h",
+    });
     next();
 
-    return res.json({ message: "usuario autenticado com sucesso" });
+    return res.json({ message: "usuario autenticado com sucesso",token });
   } catch (error) {
     console.log(error);
     next();
